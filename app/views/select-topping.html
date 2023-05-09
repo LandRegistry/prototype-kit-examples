@@ -1,0 +1,93 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+    	{% set choice = data['pizza']['toppings'] %}
+
+			<form action="/check-pizza" method="post" novalidate>
+
+			{{ govukCheckboxes({
+			idPrefix: "choose-pizza-toppings",
+			name: "pizza[toppings]",
+			fieldset: {
+			  legend: {
+			    text: "Which toppings would you like?",
+			    isPageHeading: true,
+			    classes: "govuk-fieldset__legend--l"
+			  }
+			},
+			hint: {
+			  text: "Select as many as you want."
+			},
+			items: [
+			  {
+			    value: "chicken",
+			    text: "Chicken",
+			    checked: choice.includes("chicken") if choice
+			  },
+			  {
+			    value: "ham",
+			    text: "Ham",
+			    checked: choice.includes("ham") if choice
+			  },
+			  {
+			    value: "jalapeño",
+			    text: "Jalapeño peppers",
+			    checked: choice.includes("jalapeño") if choice
+			  },
+			  {
+			    value: "onions",
+			    text: "Onions",
+			    checked: choice.includes("onions") if choice
+			  },
+			  {
+			    value: "peppers",
+			    text: "Peppers",
+			    checked: choice.includes("peppers") if choice
+			  },
+			  {
+			    value: "pepperoni",
+			    text: "Pepperoni",
+			    checked: choice.includes("pepperoni") if choice
+			  },
+			  {
+			    value: "pineapple",
+			    text: "Pineapple",
+			    checked: choice.includes("pineapple") if choice
+			  },
+			  {
+			    value: "sausage",
+			    text: "Sausage",
+			    checked: choice.includes("sausage") if choice
+			  },
+			  {
+			    value: "sweetcorn",
+			    text: "Sweetcorn",
+			    checked: choice.includes("sweetcorn") if choice
+			  }
+			]
+			}) }}
+
+			{{ govukButton({
+			text: "Continue"
+			}) }}
+			</form>
+
+    </div>
+  </div>
+
+{% endblock %}
