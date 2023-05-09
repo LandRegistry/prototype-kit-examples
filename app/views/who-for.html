@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+    	{% set choice = data['pizza']['eater'] %}
+
+			{% if choice %}
+			{% set formAction = "/check-pizza" %}
+			{% else %}
+			{% set formAction = "/select-size" %}
+			{% endif %}
+
+			<form action="{{ formAction }}" method="post" novalidate>
+
+
+			{{ govukInput({
+			label: {
+			  text: "Who is this pizza for?",
+			  classes: "govuk-label--l",
+			  isPageHeading: true
+			},
+			hint: {
+			  text: "Name of the pizza eater."
+			},
+			id: "pizza-eater",
+			name: "pizza[eater]",
+			value: choice or ''
+			}) }}
+
+			{{ govukButton({
+			text: "Continue"
+			}) }}
+
+			</form>
+
+    </div>
+  </div>
+
+{% endblock %}

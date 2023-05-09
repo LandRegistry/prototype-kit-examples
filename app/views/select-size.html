@@ -1,0 +1,69 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+			{% if choice %}
+			{% set formAction = "/check-pizza" %}
+			{% else %}
+			{% set formAction = "/select-crust" %}
+			{% endif %}
+
+			<form action="{{ formAction }}" method="post" novalidate>
+
+			{{ govukRadios({
+			idPrefix: "choose-pizza-size",
+			name: "pizza[size]",
+			fieldset: {
+			  legend: {
+			    text: "What size pizza would you like?",
+			    isPageHeading: true,
+			    classes: "govuk-fieldset__legend--l"
+			  }
+			},
+			items: [
+			  {
+			    value: "personal",
+			    text: "Personal 7\"",
+			    checked: choice === "personal"
+			  },
+			  {
+			    value: "small",
+			    text: "Small 9.5\"",
+			    checked: choice === "small"
+			  },
+			  {
+			    value: "medium",
+			    text: "Medium 11.5\"",
+			    checked: choice === "medium"
+			  },
+			  {
+			    value: "large",
+			    text: "Large 13.5\"",
+			    checked: choice === "large"
+			  }
+			]
+			}) }}
+
+			{{ govukButton({
+			text: "Continue"
+			}) }}
+			</form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your pizza before ordering
+      </h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Who is it for"
+            },
+            value: {
+              text: data['pizza']['eater']
+            },
+            actions: {
+              items: [
+                {
+                  href: "who-for",
+                  text: "Change",
+                  visuallyHiddenText: "who the pizza is for"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Crust"
+            },
+            value: {
+              text: data['pizza']['crust']
+            },
+            actions: {
+              items: [
+                {
+                  href: "select-crust",
+                  text: "Change",
+                  visuallyHiddenText: "crust"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Toppings"
+            },
+            value: {
+              text: data['pizza']['toppings']
+            },
+            actions: {
+              items: [
+                {
+                  href: "select-topping",
+                  text: "Change",
+                  visuallyHiddenText: "toppings"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Now send your application
+      </h2>
+
+      <p>
+        By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      </p>
+
+      <form action="/confirmation" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Order pizza"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

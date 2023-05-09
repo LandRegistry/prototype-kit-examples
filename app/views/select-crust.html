@@ -1,0 +1,70 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+			{% set choice = data['pizza']['crust'] %}
+
+			{% if choice %}
+			{% set formAction = "/check-pizza" %}
+			{% else %}
+			{% set formAction = "/select-topping" %}
+			{% endif %}
+
+			<form action="{{ formAction }}" method="post" novalidate>
+
+			{{ govukRadios({
+				idPrefix: "choose-pizza-crust",
+				name: "pizza[crust]",
+			  fieldset: {
+			    legend: {
+			      text: "Which crust would you like?",
+			      isPageHeading: true,
+			      classes: "govuk-fieldset__legend--l"
+			    }
+			  },
+			  items: [
+			    {
+			      value: "classic",
+			      text: "Classic",
+			      checked: choice === "classic"
+			    },
+			    {
+			      value: "stuffed",
+			      text: "Stuffed",
+			      checked: choice === "stuffed"
+			    },
+			    {
+			      value: "italian-style",
+			      text: "Italian style",
+			      checked: choice === "italian-style"
+			    },
+			    {
+			      value: "thin-and-crispy",
+			      text: "Thin and crispy",
+			      checked: choice === "thin-and-crispy"
+			    }
+			  ]
+			}) }}
+
+			{{ govukButton({
+			text: "Continue"
+			}) }}
+			</form>
+
+    </div>
+  </div>
+
+{% endblock %}
