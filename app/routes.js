@@ -16,10 +16,15 @@ router.get('/who-for', (req, res, next) => {
 })
 
 router.get('/select-crust', (req, res, next) => {
-	choice = req.session.data['pizza']['crust'];
-	console.log(req.session.data['pizza']['crust']);
-	console.log(choice);
-	res.render('select-crust.njk')
+	choice = req.session.data['pizza']['size'];
+	if (choice == "large") {
+		discountAmount = "10%"
+	}
+	else
+	{
+		discountAmount = "";
+	}
+	res.render('select-crust.njk', { discount: discountAmount })
 })
 
 router.post('/select-size', (req, res, next) => {

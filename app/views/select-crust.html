@@ -23,6 +23,10 @@
 			{% set formAction = "/select-topping" %}
 			{% endif %}
 
+			{% if discount != "" %}
+			<p>Discount = {{ discount }}</p>
+			{% endif %}
+
 			<form action="{{ formAction }}" method="post" novalidate>
 
 			{{ govukRadios({
